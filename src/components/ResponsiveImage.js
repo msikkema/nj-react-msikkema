@@ -21,6 +21,8 @@ class ResponsiveImage extends Component {
 
   render() {
     const { images, alt, classes, className, aspect, children } = this.props;
+    console.log(images);
+    
 
     return (
       <div
@@ -31,18 +33,21 @@ class ResponsiveImage extends Component {
         )}
       >
         <picture>
-          {images && (
-            <source
-              key="jpg"
-              data-srcset={images.map(item => `${item.url} ${item.width}w`)}
+          {images && images[images.length - 1] ? (
+            <img
+              data-sizes="auto"
+              alt={alt || ''}
+              className={cn('lazyload', classes.image)}
+              src={images[images.length - 1].url}
+            />
+          ) : (
+            <img
+              data-sizes="auto"
+              alt={alt || ''}
+              className={cn('lazyload', classes.image)}
+              src={defaultImage} // should be the source image to fallback on
             />
           )}
-          <img
-            data-sizes="auto"
-            alt={alt || ''}
-            className={cn('lazyload', classes.image)}
-            src={defaultImage} // should be the source image to fallback on
-          />
         </picture>
         {children}
       </div>
