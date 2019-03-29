@@ -1,39 +1,52 @@
-import React, { Component } from 'react'
-import cn from 'classnames'
-import injectSheet from 'react-jss'
-import defaultImage from '../images/spacer'
-import { round } from '../helpers/math'
-import get from 'lodash/get'
+import React, { Component } from 'react';
+import cn from 'classnames';
+import injectSheet from 'react-jss';
+import defaultImage from '../images/spacer';
+import { round } from '../helpers/math';
+import get from 'lodash/get';
 
 class ResponsiveImage extends Component {
-  shouldComponentUpdate (nextProps) {
+  shouldComponentUpdate(nextProps) {
     // only change if the images change
-    const { images, children, className, classes } = this.props
+    const { images, children, className, classes } = this.props;
     if (get(images, [0, 'url']) !== get(nextProps.images, [0, 'url'])) {
-      return true
+      return true;
     }
     return (
       children !== nextProps.children ||
       className !== nextProps.className ||
       classes !== nextProps.classes
-    )
+    );
   }
 
-  render () {
-    const { images, alt, classes, className, aspect, children } = this.props
+  render() {
+    const { images, alt, classes, className, aspect, children } = this.props;
 
-    return <div className={cn(classes.container, { [classes.fixedAspect]: aspect }, className)}>
-      <picture>
-        {images && <source key='jpg' data-srcset={images.map(item => `${item.url} ${item.width}w`)} />}
-        <img
-          data-sizes='auto'
-          alt={alt || ''}
-          className={cn('lazyload', classes.image)}
-          src={defaultImage} // should be the source image to fallback on
-        />
-      </picture>
-      {children}
-    </div>
+    return (
+      <div
+        className={cn(
+          classes.container,
+          { [classes.fixedAspect]: aspect },
+          className
+        )}
+      >
+        <picture>
+          {images && (
+            <source
+              key="jpg"
+              data-srcset={images.map(item => `${item.url} ${item.width}w`)}
+            />
+          )}
+          <img
+            data-sizes="auto"
+            alt={alt || ''}
+            className={cn('lazyload', classes.image)}
+            src={defaultImage} // should be the source image to fallback on
+          />
+        </picture>
+        {children}
+      </div>
+    );
   }
 }
 
@@ -68,4 +81,4 @@ export default injectSheet({
   link: {
     textDecoration: 'none'
   }
-})(ResponsiveImage)
+})(ResponsiveImage);

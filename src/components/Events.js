@@ -1,12 +1,12 @@
-import React from 'react'
-import injectSheet from 'react-jss'
-import { connect } from 'react-redux'
-import { compose } from 'redux'
-import { getEvents, isEventsReady } from '../selectors'
-import Icon from './Icon'
-import titleIcon from '../icons/vivid-angle-top-left.svg'
-import theme from '../style/theme'
-import Event from './Event'
+import React from 'react';
+import injectSheet from 'react-jss';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { getEvents, isEventsReady } from '../selectors';
+import Icon from './Icon';
+import titleIcon from '../icons/vivid-angle-top-left.svg';
+import theme from '../style/theme';
+import Event from './Event';
 
 const Events = ({ classes, ready, events }) => (
   <div className={classes.container}>
@@ -18,17 +18,19 @@ const Events = ({ classes, ready, events }) => (
     {ready && (
       <div className={classes.tilesWrapper}>
         <div className={classes.tiles}>
-          {events.map(event => <Event key={event.id} className={classes.tile} content={event} />)}
+          {events.map(event => (
+            <Event key={event.id} className={classes.tile} content={event} />
+          ))}
         </div>
       </div>
     )}
   </div>
-)
+);
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   ready: isEventsReady(state),
   events: getEvents(state)
-})
+});
 
 export default compose(
   connect(mapStateToProps),
@@ -75,4 +77,4 @@ export default compose(
       }
     }
   })
-)(Events)
+)(Events);

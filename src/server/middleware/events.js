@@ -1,4 +1,4 @@
-import events from './events.json'
+import events from './events.json';
 
 export default (req, res) => {
   if (req.query.eventTypeId) {
@@ -7,7 +7,7 @@ export default (req, res) => {
       error: {
         message: 'eventTypeId filter not yet implemented'
       }
-    })
+    });
   }
 
   res.json({
@@ -15,5 +15,5 @@ export default (req, res) => {
     results: {
       events
     }
-  })
-}
+  });
+};

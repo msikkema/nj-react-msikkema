@@ -1,1 +1,1 @@
-export const eventTypeIdFilterSelector = (state) => state.filters.eventTypeId
+export const eventTypeIdFilterSelector = state => state.filters.eventTypeId;

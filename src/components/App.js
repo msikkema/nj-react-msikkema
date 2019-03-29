@@ -1,19 +1,19 @@
-import React, { Component } from 'react'
-import injectSheet from 'react-jss'
-import Events from './Events'
-import theme from '../style/theme'
+import React, { Component } from 'react';
+import injectSheet from 'react-jss';
+import Events from './Events';
+import theme from '../style/theme';
 
 class App extends Component {
-  render () {
+  render() {
     return (
-      <div className='container'>
-        <div className='row'>
-          <div className='col-sm-12'>
+      <div className="container">
+        <div className="row">
+          <div className="col-sm-12">
             <Events />
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -36,4 +36,4 @@ export default injectSheet({
       }
     }
   }
-})(App)
+})(App);

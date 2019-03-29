@@ -1,4 +1,4 @@
-import isPromise from 'redux-promise-middleware/dist/isPromise'
+import isPromise from 'redux-promise-middleware/dist/isPromise';
 
 // redux-promise-middleware re-throws when a promise rejects, even though it dispatches a _REJECTED action, which
 // seems to me like a mistake ... except that it's more or less acknowledged in the official "complex" example. This
@@ -7,8 +7,8 @@ import isPromise from 'redux-promise-middleware/dist/isPromise'
 export default store => next => action => {
   if (isPromise(action.payload)) {
     // Dispatch initial pending promise, but catch any errors -
-    return next(action).catch(error => error)
+    return next(action).catch(error => error);
   }
 
-  return next(action)
-}
+  return next(action);
+};
