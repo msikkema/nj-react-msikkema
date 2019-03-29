@@ -1,8 +1,8 @@
-import { EVENT_TYPE_FILTER_CHANGED } from '../actions'
+import { EVENT_TYPE_FILTER_CHANGED } from '../actions';
 
 const initialState = {
   eventTypeId: null
-}
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -10,10 +10,10 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         eventTypeId: action.payload
-      }
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default reducer
+export default reducer;

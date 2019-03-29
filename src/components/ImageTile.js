@@ -1,29 +1,51 @@
-import React from 'react'
-import injectSheet from 'react-jss'
-import classNames from 'classnames'
-import ResponsiveImage from './ResponsiveImage'
-import Icon from './Icon'
-import theme from '../style/theme'
-import color from 'color'
-import ShareButtons from './ShareButtons'
+import React from 'react';
+import injectSheet from 'react-jss';
+import classNames from 'classnames';
+import ResponsiveImage from './ResponsiveImage';
+import Icon from './Icon';
+import theme from '../style/theme';
+import color from 'color';
+import ShareButtons from './ShareButtons';
 
 const ImageTile = ({
-  classes, className, id, image, title, shareTitle = title, url, icon, imageAspect = (7 / 4), children, extraChildren
-}) =>
+  classes,
+  className,
+  id,
+  image,
+  title,
+  shareTitle = title,
+  url,
+  icon,
+  imageAspect = 7 / 4,
+  children,
+  extraChildren
+}) => (
   <div className={classNames(classes.tile, className)}>
     <a className={classes.content} href={url}>
-      <ResponsiveImage aspect={imageAspect} images={image && image.sizes}
-        alt={image && image.alt} className={classes.image} />
-      <div className={classNames(classes.details, icon && classes.detailsWithIcon)}>
+      <ResponsiveImage
+        aspect={imageAspect}
+        images={image && image.sizes}
+        alt={image && image.alt}
+        className={classes.image}
+      />
+      <div
+        className={classNames(classes.details, icon && classes.detailsWithIcon)}
+      >
         {icon && <Icon className={classes.icon} symbol={icon} />}
         <h3 className={classes.title}>{title}</h3>
         {children}
       </div>
     </a>
 
-    <ShareButtons className={classes.shareButtons} url={url} title={shareTitle} id={id} />
+    <ShareButtons
+      className={classes.shareButtons}
+      url={url}
+      title={shareTitle}
+      id={id}
+    />
     {extraChildren}
   </div>
+);
 
 export default injectSheet({
   tile: {
@@ -73,7 +95,9 @@ export default injectSheet({
       top: 17,
       width: 1,
       height: 18,
-      backgroundColor: color(theme.colors.heading).mix(color(theme.colors.white), 0.9).hex()
+      backgroundColor: color(theme.colors.heading)
+        .mix(color(theme.colors.white), 0.9)
+        .hex()
     }
   },
   title: {
@@ -95,4 +119,4 @@ export default injectSheet({
       bottom: 10
     }
   }
-})(ImageTile)
+})(ImageTile);

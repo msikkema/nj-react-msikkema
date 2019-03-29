@@ -72,7 +72,7 @@ Don’t forget to push your work up to your fork of the repo, and let us know yo
 # General documentation
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), and has been
-enhanced with server-side rendering, Redux, JSS and Standard code style.
+enhanced with server-side rendering, Redux, JSS and ~~Standard code style~~ Prettier code style.
 
 ## Available Scripts
 
