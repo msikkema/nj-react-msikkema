@@ -21,8 +21,6 @@ class ResponsiveImage extends Component {
 
   render() {
     const { images, alt, classes, className, aspect, children } = this.props;
-    console.log(images);
-    
 
     return (
       <div
