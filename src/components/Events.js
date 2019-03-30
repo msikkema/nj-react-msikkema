@@ -2,14 +2,15 @@ import React from 'react';
 import injectSheet from 'react-jss';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { getEvents, isEventsReady } from '../selectors';
+import { getEvents, isEventsReady, getEventsError } from '../selectors';
 import Icon from './Icon';
 import titleIcon from '../icons/vivid-angle-top-left.svg';
 import theme from '../style/theme';
 import Event from './Event';
 import Spinner from './Spinner';
+import Button from './Button';
 
-const Events = ({ classes, ready, events }) => (
+const Events = ({ classes, ready, events, error }) => (
   <div className={classes.container}>
     <h3 className={classes.title}>
       <Icon className={classes.titleIcon} symbol={titleIcon} />
@@ -17,19 +18,33 @@ const Events = ({ classes, ready, events }) => (
       {ready && events.length ? `: ${events.length} events found` : ``}
     </h3>
 
-    {!ready && (
+    {error ? (
       <div className={classes.fullSizeCenter}>
-        <Spinner />
-        <h2>Hang tight while we find the events...</h2>
+        <h1>Sorry about that</h1>
+        <h4>There was an error getting your results.</h4>
+        <div className={classes.buttonContainer} />
+        <Button label="Return Home" href="/" />
       </div>
-    )}
-    {ready && (
-      <div className={classes.tilesWrapper}>
-        <div className={classes.tiles}>
-          {events.map(event => (
-            <Event key={event.id} className={classes.tile} content={event} />
-          ))}
-        </div>
+    ) : (
+      <div>
+        {ready ? (
+          <div className={classes.tilesWrapper}>
+            <div className={classes.tiles}>
+              {events.map(event => (
+                <Event
+                  key={event.id}
+                  className={classes.tile}
+                  content={event}
+                />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div className={classes.fullSizeCenter}>
+            <Spinner />
+            <h2>Hang tight while we find the events...</h2>
+          </div>
+        )}
       </div>
     )}
   </div>
@@ -37,7 +52,8 @@ const Events = ({ classes, ready, events }) => (
 
 const mapStateToProps = state => ({
   ready: isEventsReady(state),
-  events: getEvents(state)
+  events: getEvents(state),
+  error: getEventsError(state)
 });
 
 export default compose(
@@ -92,6 +108,10 @@ export default compose(
       justifyContent: 'center',
       textAlign: 'center',
       alignItems: 'center'
+    },
+
+    buttonContainer: {
+      paddingTop: '60px'
     }
   })
 )(Events);
