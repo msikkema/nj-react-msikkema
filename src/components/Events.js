@@ -7,15 +7,22 @@ import Icon from './Icon';
 import titleIcon from '../icons/vivid-angle-top-left.svg';
 import theme from '../style/theme';
 import Event from './Event';
+import Spinner from './Spinner';
 
 const Events = ({ classes, ready, events }) => (
   <div className={classes.container}>
     <h3 className={classes.title}>
       <Icon className={classes.titleIcon} symbol={titleIcon} />
       Results
-      {isEventsReady && events.length ? `: ${events.length} events found` : ``}
+      {ready && events.length ? `: ${events.length} events found` : ``}
     </h3>
-    {!ready && <p>Loading...</p>}
+
+    {!ready && (
+      <div className={classes.fullSizeCenter}>
+        <Spinner />
+        <h2>Hang tight while we find the events...</h2>
+      </div>
+    )}
     {ready && (
       <div className={classes.tilesWrapper}>
         <div className={classes.tiles}>
@@ -76,6 +83,15 @@ export default compose(
       '@media (min-width: 1200px)': {
         width: `calc(${100 / 3}% - ${theme.gutter}px)`
       }
+    },
+
+    fullSizeCenter: {
+      height: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      textAlign: 'center',
+      alignItems: 'center'
     }
   })
 )(Events);
