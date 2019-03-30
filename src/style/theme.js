@@ -7,6 +7,11 @@ export const colors = {
   white: '#fff'
 };
 
+export const transitions = {
+  standard: 'all 0.3s ease',
+  slow: 'all 1s ease'
+};
+
 export default {
   colors,
   fonts: {
