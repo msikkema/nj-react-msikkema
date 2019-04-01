@@ -3,8 +3,8 @@ import { compose } from 'redux';
 import injectSheet from 'react-jss';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import { isFavouritedSelector } from '../selectors';
-import { toggleFavouriteActionCreator } from '../actions';
+import { isFavouritedSelector, getFavouritesApiUrl } from '../selectors';
+import { fetchFavouritesActionCreator } from '../actions';
 import theme from '../style/theme';
 import facebookIcon from '../icons/facebook.svg';
 import twitterIcon from '../icons/twitter.svg';
@@ -15,6 +15,7 @@ import map from 'lodash/map';
 import color from 'color';
 import { round } from '../helpers/math';
 import detectIt from 'detect-it';
+import { persistFavourite, fetchFavourites } from '../services/favouritesService';
 
 const popupWindowProps = url => ({
   url,
@@ -101,6 +102,12 @@ const ShareButtons = ({
   );
 };
 
+const addFavouriteToSession = (dispatch, id) => {
+  persistFavourite(id).then(() => {
+    dispatch(fetchFavouritesActionCreator(fetchFavourites));
+  });
+};
+
 function mapStateToProps(state, { id }) {
   return {
     isFavourited: isFavouritedSelector(state, id)
@@ -109,7 +116,7 @@ function mapStateToProps(state, { id }) {
 
 function mapDispatchToProps(dispatch, { id }) {
   return {
-    toggleFavourited: () => dispatch(toggleFavouriteActionCreator(id))
+    toggleFavourited: () => addFavouriteToSession(dispatch, id)
   };
 }
 

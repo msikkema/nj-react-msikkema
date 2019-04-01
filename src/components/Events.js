@@ -2,7 +2,12 @@ import React from 'react';
 import injectSheet from 'react-jss';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { getEvents, isEventsReady, getEventsError } from '../selectors';
+import {
+  getEvents,
+  isEventsReady,
+  getEventsError,
+  getFavourites
+} from '../selectors';
 import Icon from './Icon';
 import titleIcon from '../icons/vivid-angle-top-left.svg';
 import theme from '../style/theme';
@@ -53,7 +58,8 @@ const Events = ({ classes, ready, events, error }) => (
 const mapStateToProps = state => ({
   ready: isEventsReady(state),
   events: getEvents(state),
-  error: getEventsError(state)
+  error: getEventsError(state),
+  favourites: getFavourites(state)
 });
 
 export default compose(
